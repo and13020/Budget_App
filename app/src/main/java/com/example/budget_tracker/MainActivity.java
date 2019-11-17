@@ -1,14 +1,20 @@
 package com.example.budget_tracker;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import com.example.budget_tracker.ui.home.BudgetFragment;
+import com.example.budget_tracker.ui.home.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.navigation.ui.AppBarConfiguration;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,15 +22,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+
+        // Get/set bottom navigation view
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.bottomNav, new HomeFragment()).commit();
     }
 
+    // Select fragment
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            Fragment selectedFragment = null;
+
+            switch (menuItem.getItemId()) {
+                case R.id.homeFragment:
+                    selectedFragment = new HomeFragment();
+                    break;
+                case R.id.budgetFragment:
+                    selectedFragment = new BudgetFragment();
+                    break;
+            }
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment)
+                    .commit();
+            return true;
+        }
+    };
 }

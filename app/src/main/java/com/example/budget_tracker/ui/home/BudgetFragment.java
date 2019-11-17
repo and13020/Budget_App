@@ -1,22 +1,30 @@
 package com.example.budget_tracker.ui.home;
 
+
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.fragment.app.Fragment;
 
 import com.example.budget_tracker.R;
 
-public class HomeFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class BudgetFragment extends Fragment {
 
-    public HomeFragment() {
-
+    public BudgetFragment() {
+        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_budget, container, false);
     }
+
 }

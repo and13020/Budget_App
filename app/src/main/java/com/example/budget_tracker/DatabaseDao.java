@@ -20,12 +20,16 @@ import java.util.List;
 public interface DatabaseDao {
 
     // Insert mItem
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertmItem(DatabaseC databaseC);
+    @Insert
+    void insertItem(DatabaseC... databaseC);
 
     // Delete all from budget_table
     @Query("DELETE FROM budget_table")
     void deleteAll();
+
+    // Find total rows
+    @Query("SELECT COUNT(*) FROM budget_table")
+    int rowCount();
 
     // Select all from budget_table
     // Wrap the return type <list> with LiveData to keep it current

@@ -2,9 +2,11 @@ package com.example.budget_tracker;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -12,7 +14,7 @@ import java.util.concurrent.Executors;
 /***********************************************
  * Room DatabaseC:
  * Allows the DAO to query to database
- * Runs query threads asynchronously
+ * Run query threads asynchronously
  **********************************************/
 
 // Turn it into a ROOM database,
@@ -20,25 +22,21 @@ import java.util.concurrent.Executors;
 @Database(entities = {DatabaseC.class}, version = 1, exportSchema = false)
 public abstract class DatabaseRoom extends RoomDatabase {
 
-    public abstract DatabaseDao databaseDao();
+    private static DatabaseRoom INSTANCE;
 
-    // Created a singleton of DatabaseRoom type
-    private static volatile DatabaseRoom INSTANCE;
-    private static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-
-    // Returns the single of DatabaseRoom type
-    // ...will create it on first access
-    static DatabaseRoom getDatabase(final Context context) {
+    public static DatabaseRoom getInstance(Context context) {
         if (INSTANCE == null) {
-            synchronized (DatabaseRoom.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            DatabaseRoom.class, "my_database").build();
-                }
-            }
+            INSTANCE = Room.databaseBuilder(
+                    context.getApplicationContext(),
+                    DatabaseRoom.class,
+                    "DatabaseRoom").build();
         }
         return INSTANCE;
     }
 
+    public static void destroyInstance() {
+        INSTANCE = null;
+    }
+
+    public abstract DatabaseDao databaseDao();
 }

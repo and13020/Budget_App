@@ -2,6 +2,7 @@ package com.example.budget_tracker;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -13,17 +14,17 @@ import java.util.List;
  * Can also share data between fragments
  *****************************************/
 public class DatabaseViewModel extends AndroidViewModel {
-    private DatabaseRepository dRepository;
     private LiveData<List<DatabaseC>> myResults;
 
-    public DatabaseViewModel (Application application) {
+    public DatabaseViewModel (@NonNull Application application) {
         super(application);
-        dRepository = new DatabaseRepository(application);
-        myResults = dRepository.getResults();
+
+        myResults = DatabaseRoom
+                .getInstance(getApplication())
+                .databaseDao().getAllFromBudgetTable();
     }
 
-    LiveData<List<DatabaseC>> getResults() { return myResults; }
-
-    // Wrapper 'insert' calls repository's insert
-    public void insert(DatabaseC databaseC) { dRepository.insert(databaseC);}
+    public LiveData<List<DatabaseC>> getResults() {
+        return myResults;
+    }
 }

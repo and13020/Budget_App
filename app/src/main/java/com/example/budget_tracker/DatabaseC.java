@@ -1,6 +1,5 @@
 package com.example.budget_tracker;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -10,7 +9,6 @@ import androidx.room.PrimaryKey;
 // DatabaseC Table Entity
 @Entity(tableName = "budget_table")
 public class DatabaseC extends RecyclerView.LayoutManager {
-
     // Table columns
     @PrimaryKey(autoGenerate =  true)
     private int mId;
@@ -22,6 +20,7 @@ public class DatabaseC extends RecyclerView.LayoutManager {
     private float mCost;
 
     // Getter/setters for id, mItem, mCost
+    public void setMId(int mId) {this.mId = mId;}
     public int getMId() {return this.mId;}
 
     public void setMItem(String mItem) {this.mItem = mItem;}

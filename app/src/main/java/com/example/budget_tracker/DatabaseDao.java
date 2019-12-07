@@ -3,7 +3,6 @@ package com.example.budget_tracker;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import java.util.List;
@@ -33,6 +32,6 @@ public interface DatabaseDao {
 
     // Select all from budget_table
     // Wrap the return type <list> with LiveData to keep it current
-    @Query("SELECT item_name FROM budget_table")
+    @Query("SELECT * FROM budget_table")
     LiveData<List<DatabaseC>> getAllFromBudgetTable();
 }

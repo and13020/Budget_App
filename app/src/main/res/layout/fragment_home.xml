@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Data -->
+    <!-- Data
     <data>
         <variable
             android:name="itemTitle"
@@ -15,7 +15,7 @@
         <variable
             android:name="itemCost"
             android:type="com.example.budget_tracker.DatabaseC" />
-    </data>
+    </data>-->
 
     <!-- Top banner (light blue) -->
     <TextView

@@ -31,11 +31,14 @@ public class HomeFragment extends Fragment {
         FragmentHomeBinding binding =
                 DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
 
+        // List adapter to handle the layout manager
         DatabaseListAdapter recyclerViewAdapter =
                 new DatabaseListAdapter(new ArrayList<>());
 
+        // Connect to fragment to activity
         binding.recyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity()));
+
 
         DatabaseViewModel viewModel =
                 ViewModelProviders.of(this).get(DatabaseViewModel.class);

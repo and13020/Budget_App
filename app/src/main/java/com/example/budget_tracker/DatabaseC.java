@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 
 // DatabaseC Table Entity
 @Entity(tableName = "budget_table")
-public class DatabaseC extends RecyclerView.LayoutManager {
+public class DatabaseC{
     // Table columns
     @PrimaryKey(autoGenerate =  true)
     private int mId;
@@ -33,10 +33,10 @@ public class DatabaseC extends RecyclerView.LayoutManager {
     // Constructors
     public DatabaseC(){}
 
-    @Override
-    public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-        return null;
-    }
+    //@Override
+    //public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+    //    return null;
+    //}
 
     @Ignore
     public DatabaseC(int mId, String mItem, float mCost){
@@ -51,6 +51,7 @@ public class DatabaseC extends RecyclerView.LayoutManager {
         this.mCost = mCost;
     }
 
+    @Ignore
     public DatabaseC(String mItem) {
         this.mItem = mItem;
     }

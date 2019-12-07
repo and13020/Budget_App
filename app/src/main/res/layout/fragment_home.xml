@@ -30,6 +30,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:background="@android:color/darker_gray"
         tools:listitem="@layout/fragment_home"
@@ -37,6 +38,12 @@
         app:layout_constraintLeft_toLeftOf="@id/homeFragment"
         app:layout_constraintRight_toRightOf="@id/homeFragment"
         app:layout_constraintTop_toTopOf="@id/homeFragment" />
+
+    <TextView
+        android:id="@+id/listItemTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/homeFragment"

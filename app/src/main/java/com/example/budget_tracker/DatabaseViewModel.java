@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /*****************************************
@@ -19,8 +21,8 @@ public class DatabaseViewModel extends AndroidViewModel {
     public DatabaseViewModel (@NonNull Application application) {
         super(application);
 
-        myResults = DatabaseRoom
-                .getInstance(getApplication())
+        //noinspection MoveFieldAssignmentToInitializer
+        myResults = DatabaseRoom.getInstance(getApplication())
                 .databaseDao().getAllFromBudgetTable();
     }
 

@@ -1,6 +1,5 @@
 package com.example.budget_tracker;
 
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -32,11 +31,6 @@ public class DatabaseC{
 
     // Constructors
     public DatabaseC(){}
-
-    //@Override
-    //public RecyclerView.LayoutParams generateDefaultLayoutParams() {
-    //    return null;
-    //}
 
     @Ignore
     public DatabaseC(int mId, String mItem, float mCost){

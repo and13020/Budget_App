@@ -2,9 +2,13 @@ package com.example.budget_tracker;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /***********************************************
@@ -18,20 +22,21 @@ import java.util.List;
 @Dao
 public interface DatabaseDao {
 
-    // Insert mItem
-    @Insert
+    // Insert Method
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertItem(DatabaseC... databaseC);
 
-    // Delete all from budget_table
-    @Query("DELETE FROM budget_table")
-    void deleteAll();
+    // Update Method
+    @Update void updateItem(DatabaseC... databaseCS);
+
+    // Delete Method
+    @Delete void deleteItem(DatabaseC... databaseCS);
 
     // Find total rows
     @Query("SELECT COUNT(*) FROM budget_table")
     int rowCount();
 
     // Select all from budget_table
-    // Wrap the return type <list> with LiveData to keep it current
-    @Query("SELECT * FROM budget_table")
-    LiveData<List<DatabaseC>> getAllFromBudgetTable();
+    @Query("SELECT * FROM budget_table ORDER BY mId")
+    LiveData<ArrayList<DatabaseC>> getAllFromBudgetTable();
 }

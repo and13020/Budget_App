@@ -3,7 +3,6 @@ package com.example.budget_tracker;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class DatabaseInitializer {
 
@@ -22,7 +21,7 @@ class DatabaseInitializer {
         protected Void doInBackground(final Void... params) {
             // If empty, add initial data
             if (databaseRoom.databaseDao().rowCount() == 0) {
-                List<DatabaseC> data = new ArrayList<>();
+                ArrayList<DatabaseC> data = new ArrayList<>();
                 data.add(new DatabaseC("Item #1"));
                 data.add(new DatabaseC("Item #2"));
                 data.add(new DatabaseC("Item #3"));

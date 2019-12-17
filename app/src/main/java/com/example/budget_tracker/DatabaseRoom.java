@@ -19,7 +19,7 @@ public abstract class DatabaseRoom extends RoomDatabase {
 
     private static DatabaseRoom INSTANCE;
 
-    public static DatabaseRoom getInstance(Context context) {
+    static public DatabaseRoom getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(
                     context.getApplicationContext(),

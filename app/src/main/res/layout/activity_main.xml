@@ -15,18 +15,6 @@
         android:layout_above="@+id/bottomNav" >
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-
-        android:id="@+id/recyclerView"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
-        tools:showIn="@layout/activity_main">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"

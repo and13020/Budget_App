@@ -13,41 +13,41 @@ public class DatabaseC{
     private int mId;
 
     @ColumnInfo(name = "item_name")
-    private String mItem;
+    private String name;
 
     @ColumnInfo(name = "item_cost")
-    private float mCost;
+    private int cost;
 
     // Getter/setters for id, mItem, mCost
     public void setMId(int mId) {this.mId = mId;}
-    public int getMId() {return this.mId;}
+    public int getMId()         {return mId;}
 
-    public void setMItem(String mItem) {this.mItem = mItem;}
-    public String getMItem() {return this.mItem;}
+    public void setName(String name) {this.name = name;}
+    public String getName()          {return name;}
 
-    public void setMCost(float mCost) {this.mCost = mCost;}
-    public float getMCost() {return this.mCost;}
+    public void setCost(int cost) {this.cost = cost;}
+    public int getCost()          {return cost;}
 
 
     // Constructors
     public DatabaseC(){}
 
     @Ignore
-    public DatabaseC(int mId, String mItem, float mCost){
-        this.mId = mId;
-        this.mItem = mItem;
-        this.mCost = mCost;
+    public DatabaseC(int mId, String name, int cost){
+        setMId(mId);
+        setCost(cost);
+        setName(name);
     }
 
     @Ignore
-    public DatabaseC(String mItem, float mCost){
-        this.mItem = mItem;
-        this.mCost = mCost;
+    public DatabaseC(String name, int cost){
+        setName(name);
+        setCost(cost);
     }
 
     @Ignore
     public DatabaseC(String mItem) {
-        this.mItem = mItem;
+        setName(mItem);
     }
 }
 

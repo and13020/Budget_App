@@ -1,54 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Wrap xml in layout in order to generate binding class -->
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools">
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- Top banner (light blue) -->
-    <TextView
-        android:id="@+id/textView"
-        style="@style/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_bright"/>
-
-    <!-- List view -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:background="@android:color/darker_gray"
-        tools:listitem="@layout/fragment_home"
-        app:layout_constraintBottom_toBottomOf="@id/homeFragment"
-        app:layout_constraintLeft_toLeftOf="@id/homeFragment"
-        app:layout_constraintRight_toRightOf="@id/homeFragment"
-        app:layout_constraintTop_toTopOf="@id/homeFragment" />
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/listItemTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="This is fragment home."
         android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/homeFragment"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="@string/home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:scrollbars="vertical"
+        tools:listitem="@layout/list_item"
+        android:background="@android:color/holo_orange_dark">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <!--<androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".HomeFragment"
+        tools:listitem="@layout/fragment_home"
+        android:id="@+id/recyclerView"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+
+        tools:showIn="@layout/fragment_home">
+
+    </androidx.recyclerview.widget.RecyclerView> -->
+
 </FrameLayout>
 </layout>

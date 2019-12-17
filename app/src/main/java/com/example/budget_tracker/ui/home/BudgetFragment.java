@@ -1,9 +1,9 @@
 package com.example.budget_tracker.ui.home;
 
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -16,19 +16,17 @@ import com.example.budget_tracker.DatabaseRoom;
 import com.example.budget_tracker.R;
 import com.example.budget_tracker.databinding.FragmentBudgetBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import java.util.Objects;
+
 public class BudgetFragment extends Fragment {
 
     public BudgetFragment() {
     }
-    FragmentBudgetBinding binding;
+    private FragmentBudgetBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_budget, container, false);
 
@@ -38,7 +36,7 @@ public class BudgetFragment extends Fragment {
 
             if (!titleEditTextContent.isEmpty()){
                 new AddTitleTask(titleEditTextContent).execute();
-                getActivity().finish();
+                Objects.requireNonNull(getActivity()).finish();
             }
         });
 
@@ -48,13 +46,13 @@ public class BudgetFragment extends Fragment {
     private class AddTitleTask extends AsyncTask<Void, Void, Void> {
         String title;
 
-        public AddTitleTask(String title) {
+        private AddTitleTask(String title) {
             this.title = title;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            DatabaseRoom.getInstance(getActivity().getApplication())
+            DatabaseRoom.getInstance(Objects.requireNonNull(getContext()))
                     .databaseDao().insertItem(new DatabaseC(title));
             return null;
         }

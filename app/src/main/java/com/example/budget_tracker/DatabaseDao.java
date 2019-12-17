@@ -38,5 +38,5 @@ public interface DatabaseDao {
 
     // Select all from budget_table
     @Query("SELECT * FROM budget_table ORDER BY mId")
-    LiveData<ArrayList<DatabaseC>> getAllFromBudgetTable();
+    LiveData<List<DatabaseC>> getAllFromBudgetTable();
 }

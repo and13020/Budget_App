@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.budget_tracker.databinding.FragmentHomeBinding;
+import com.example.budget_tracker.databinding.ListItemBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +28,35 @@ public class DatabaseListAdapter extends RecyclerView.Adapter
         this.databaseCList = databaseCList;
     }
 
+    // ViewHolder class to handle data binding
+    class DatabaseViewHolder extends RecyclerView.ViewHolder {
+        private ListItemBinding binding;
+
+        public DatabaseViewHolder(ListItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
+
+        public void bind(DatabaseC databaseC) {
+            binding.setItem(databaseC);
+            binding.executePendingBindings();
+        }
+    }
+
     // Passes custom view layout to inflate with LayoutInflater
-    @Override
+    /*@Override
     public DatabaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        FragmentHomeBinding itemBinding = FragmentHomeBinding.inflate(
+
+        ListItemBinding itemBinding = ListItemBinding.inflate(
                 LayoutInflater.from(parent.getContext()), parent, false);
+        return new DatabaseViewHolder(itemBinding);
+    }*/
 
-        TextView itemTextView = parent.findViewById(R.id.listItemTitle);
-        Button removeButton = parent.findViewById(R.id.removeButton);
-
+    @NonNull
+    @Override
+    public DatabaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ListItemBinding itemBinding = ListItemBinding.inflate(inflater, parent, false);
         return new DatabaseViewHolder(itemBinding);
     }
 
@@ -43,7 +64,7 @@ public class DatabaseListAdapter extends RecyclerView.Adapter
     @Override
     public void onBindViewHolder(DatabaseViewHolder holder, int position) {
         DatabaseC myData = databaseCList.get(position);
-        holder.bindStuff(myData);
+        holder.bind(myData);
     }
 
     // Returns number of items (times to inflate custom view)
@@ -56,23 +77,6 @@ public class DatabaseListAdapter extends RecyclerView.Adapter
         this.databaseCList = databaseCList;
         notifyDataSetChanged();
     }
-
-    // DataBindingUtil allows binding object to access views directly
-    static class DatabaseViewHolder extends RecyclerView.ViewHolder {
-
-        FragmentHomeBinding binding;
-
-        DatabaseViewHolder(FragmentHomeBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-
-        void bindStuff(DatabaseC myData) {
-            binding.listItemTitle.setText(myData.getMItem());
-            binding.executePendingBindings();
-        }
-    }
-
 }
 
 

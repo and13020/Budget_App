@@ -17,6 +17,6 @@
     <!-- Fragment Budget -->
     <string name="autoFillText">Add your own text here</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Fragment Home -->
+    <string name="empty">No content.</string>
 </resources>

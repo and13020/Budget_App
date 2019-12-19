@@ -19,13 +19,13 @@ public class DatabaseC{
     private int cost;
 
     // Getter/setters for id, mItem, mCost
-    public void setMId(int mId) {this.mId = mId;}
-    public int getMId()         {return mId;}
+    void setMId(int mId) {this.mId = mId;}
+    int getMId()         {return mId;}
 
     public void setName(String name) {this.name = name;}
     public String getName()          {return name;}
 
-    public void setCost(int cost) {this.cost = cost;}
+    void setCost(int cost) {this.cost = cost;}
     public int getCost()          {return cost;}
 
 

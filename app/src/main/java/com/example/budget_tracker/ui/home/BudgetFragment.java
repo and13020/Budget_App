@@ -1,20 +1,21 @@
 package com.example.budget_tracker.ui.home;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.budget_tracker.DatabaseC;
-import com.example.budget_tracker.DatabaseRoom;
+import com.example.budget_tracker.DatabaseViewModel;
 import com.example.budget_tracker.R;
-import com.example.budget_tracker.databinding.FragmentBudgetBinding;
 
 import java.util.Objects;
 
@@ -22,39 +23,40 @@ public class BudgetFragment extends Fragment {
 
     public BudgetFragment() {
     }
-    private FragmentBudgetBinding binding;
+
+    private DatabaseViewModel mDatabaseViewModel;
+    private EditText mTitleEditView, mCostEditView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_budget, container, false);
-
-        binding.buttonSave.setOnClickListener((view) -> {
-            String titleEditTextContent = binding
-                    .addTitleText.getText().toString().trim();
-
-            if (!titleEditTextContent.isEmpty()){
-                new AddTitleTask(titleEditTextContent).execute();
-                Objects.requireNonNull(getActivity()).finish();
-            }
-        });
-
-        return binding.getRoot();
+        mDatabaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel.class);
+        return inflater.inflate(R.layout.fragment_budget, container, false);
     }
 
-    private class AddTitleTask extends AsyncTask<Void, Void, Void> {
-        String title;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        private AddTitleTask(String title) {
-            this.title = title;
+        // Set in onViewCreated, otherwise getView does not work
+        mTitleEditView = Objects.requireNonNull(getView()).findViewById(R.id.titleEditView);
+        mCostEditView = Objects.requireNonNull(getView()).findViewById(R.id.costEditView);
+        final Button sButton = getView().findViewById(R.id.button_save);
+
+        if (!mCostEditView.getText().toString().equals("")) {
+            try {
+                Integer.parseInt(mCostEditView.getText().toString());
+            } catch (NumberFormatException e) {
+                System.out.println("Number field is blank");
+                System.out.println(e.getMessage());
+            }
         }
 
-        @Override
-        protected Void doInBackground(Void... voids) {
-            DatabaseRoom.getInstance(Objects.requireNonNull(getContext()))
-                    .databaseDao().insertItem(new DatabaseC(title));
-            return null;
-        }
+        // Listener to save button
+        sButton.setOnClickListener(v -> {
+            DatabaseC dbOnClick = new DatabaseC(
+                    mTitleEditView.toString(),
+                    Integer.parseInt(mCostEditView.getText().toString()));
+
+            mDatabaseViewModel.insert(dbOnClick);
+        });
     }
 }

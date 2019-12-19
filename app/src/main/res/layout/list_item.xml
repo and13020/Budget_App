@@ -23,7 +23,7 @@
             android:id="@+id/listItemCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Integer.toString(item.cost)}"
+            android:text="@{Long.toString(item.cost)}"
             android:textSize="20sp"/>
 
         <Button

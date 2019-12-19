@@ -24,17 +24,21 @@ public interface DatabaseDao {
 
     // Insert Method
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertItem(DatabaseC... databaseC);
+    void insertItem(DatabaseC databaseC);
 
     // Update Method
-    @Update void updateItem(DatabaseC... databaseCS);
+    @Update void updateItem(DatabaseC databaseC);
 
     // Delete Method
-    @Delete void deleteItem(DatabaseC... databaseCS);
+    @Delete void deleteItem(DatabaseC databaseC);
 
     // Find total rows
     @Query("SELECT COUNT(*) FROM budget_table")
     int rowCount();
+
+    // Delete All From DB
+    @Query("DELETE FROM budget_table")
+    void deleteAll();
 
     // Select all from budget_table
     @Query("SELECT * FROM budget_table ORDER BY mId")

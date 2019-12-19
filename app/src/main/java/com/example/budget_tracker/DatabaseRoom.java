@@ -2,9 +2,14 @@ package com.example.budget_tracker;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /***********************************************
  * Room DatabaseC:
@@ -12,26 +17,45 @@ import androidx.room.RoomDatabase;
  * Run query threads asynchronously
  **********************************************/
 
-// Turn it into a ROOM database,
-// declare what entities belong in the database
 @Database(entities = {DatabaseC.class}, version = 1, exportSchema = false)
 public abstract class DatabaseRoom extends RoomDatabase {
 
-    private static DatabaseRoom INSTANCE;
+    public abstract DatabaseDao databaseDao();
+    private  static volatile DatabaseRoom INSTANCE;
+    private  static final int NUMBER_OF_THREADS = 4;
+    static final ExecutorService databaseWriteExecutor =
+            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static public DatabaseRoom getInstance(Context context) {
+    static DatabaseRoom getInstance(final Context context) {
         if (INSTANCE == null) {
-            INSTANCE = Room.databaseBuilder(
-                    context.getApplicationContext(),
-                    DatabaseRoom.class,
-                    "DatabaseRoom").build();
+            synchronized (DatabaseRoom.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(
+                            context.getApplicationContext(),
+                            DatabaseRoom.class, "my_database")
+                            .addCallback(sRoomDatabaseCallback)
+                            .build();
+                }
+            }
         }
         return INSTANCE;
     }
 
-    public static void destroyInstance() {
-        INSTANCE = null;
-    }
+    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
 
-    public abstract DatabaseDao databaseDao();
+            //To delete data between app restarts..
+            databaseWriteExecutor.execute(()-> {
+                DatabaseDao dao = INSTANCE.databaseDao();
+                dao.deleteAll();
+
+                DatabaseC databaseC = new DatabaseC("Apartment", 1250);
+                dao.insertItem(databaseC);
+                databaseC = new DatabaseC("Gas Monies", 30);
+                dao.insertItem(databaseC);
+            });
+        }
+    };
 }

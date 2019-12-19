@@ -3,15 +3,10 @@ package com.example.budget_tracker;
 import android.app.Application;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /*****************************************
  * ViewModel: provides data to UI and survives config changes

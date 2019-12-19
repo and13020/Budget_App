@@ -4,13 +4,9 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.budget_tracker.DatabaseC;
-import com.example.budget_tracker.DatabaseDao;
-import com.example.budget_tracker.DatabaseRoom;
-
 import java.util.List;
 
-public class DatabaseRepository {
+class DatabaseRepository {
 
     private DatabaseDao databaseDao;
     private LiveData<List<DatabaseC>> mAllData;
@@ -26,8 +22,6 @@ public class DatabaseRepository {
     }
 
     void insert(DatabaseC databaseC) {
-        DatabaseRoom.databaseWriteExecutor.execute(() -> {
-            databaseDao.insertItem(databaseC);
-        });
+        DatabaseRoom.databaseWriteExecutor.execute(() -> databaseDao.insertItem(databaseC));
     }
 }

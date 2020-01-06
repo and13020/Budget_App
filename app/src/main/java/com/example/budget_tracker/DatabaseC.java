@@ -12,14 +12,14 @@ public class DatabaseC{
     @PrimaryKey(autoGenerate =  true)
     private int mId;
 
-    @ColumnInfo(name = "item_name")
+    //@ColumnInfo(name = "item_name")
     private String name;
 
-    @ColumnInfo(name = "item_cost")
+    //@ColumnInfo(name = "item_cost")
     private int cost;
 
     // Getter/setters for id, mItem, mCost
-    void setMId(int mId) {this.mId = mId;}
+    void setMId(int mId) {this.mId = mId;} // should not have set
     int getMId()         {return mId;}
 
     public void setName(String name) {this.name = name;}
@@ -28,26 +28,15 @@ public class DatabaseC{
     void setCost(int cost) {this.cost = cost;}
     public int getCost()          {return cost;}
 
-
-    // Constructors
+    // Default Constructor
     public DatabaseC(){}
 
-    @Ignore
-    public DatabaseC(int mId, String name, int cost){
-        setMId(mId);
-        setCost(cost);
-        setName(name);
-    }
-
+    // Constructor
     @Ignore
     public DatabaseC(String name, int cost){
         setName(name);
         setCost(cost);
     }
 
-    @Ignore
-    public DatabaseC(String mItem) {
-        setName(mItem);
-    }
 }
 

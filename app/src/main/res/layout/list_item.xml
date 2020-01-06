@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
+        <!-- TODO: make sure view text is appropriate form -->
         <TextView
             android:id="@+id/listItemTitle"
             android:layout_width="wrap_content"
@@ -23,16 +24,23 @@
             android:id="@+id/listItemCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{Long.toString(item.cost)}"
+            android:text="@{Integer.toString(item.cost)}"
             android:textSize="20sp"/>
 
-        <Button
-            android:id="@+id/removeButton"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Remove"
-            android:padding="10dp"
-            android:textSize="10sp"/>
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/removeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remove"
+                android:padding="10dp"
+                android:textSize="10sp"/>
+        </LinearLayout>
     </LinearLayout>
 </layout>

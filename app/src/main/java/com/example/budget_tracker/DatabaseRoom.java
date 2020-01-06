@@ -32,7 +32,7 @@ public abstract class DatabaseRoom extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
-                            DatabaseRoom.class, "my_database")
+                            DatabaseRoom.class, "budget_database")
                             .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
@@ -51,10 +51,11 @@ public abstract class DatabaseRoom extends RoomDatabase {
                 DatabaseDao dao = INSTANCE.databaseDao();
                 dao.deleteAll();
 
-                DatabaseC databaseC = new DatabaseC("Apartment", 1250);
+
+                /*DatabaseC databaseC = new DatabaseC("Apartment", 1250);
                 dao.insertItem(databaseC);
                 databaseC = new DatabaseC("Gas Monies", 30);
-                dao.insertItem(databaseC);
+                dao.insertItem(databaseC);*/
             });
         }
     };

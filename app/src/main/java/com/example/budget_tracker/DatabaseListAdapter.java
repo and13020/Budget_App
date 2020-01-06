@@ -2,6 +2,7 @@ package com.example.budget_tracker;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,15 @@ import java.util.List;
 
 public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapter.DatabaseViewHolder> {
 
+    // Variables
+    private LayoutInflater mInflater;
+    private List<DatabaseC> databaseC = null;
+
+    // Constructor
+    public DatabaseListAdapter(Context context) {
+        mInflater = LayoutInflater.from(context);
+    }
+
     static class DatabaseViewHolder extends RecyclerView.ViewHolder {
         private final TextView nameView, costView;
 
@@ -23,13 +33,13 @@ public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapte
             costView = itemView.findViewById(R.id.listItemCost);
         }
     }
-
-    private final LayoutInflater mInflater;
-    private List<DatabaseC> databaseC;
-
-    public DatabaseListAdapter(Context context) {
-        mInflater = LayoutInflater.from(context);
+    // new
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
+
+
 
     @NonNull
     @Override
@@ -42,9 +52,10 @@ public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapte
     @Override
     public void onBindViewHolder(@NonNull DatabaseViewHolder holder, int position) {
         if (databaseC != null) {
-            DatabaseC current = databaseC.get(position);
+            DatabaseC current = databaseC.get(getItemViewType(position));
             holder.nameView.setText(current.getName());
-            holder.costView.setText(current.getCost());
+            holder.costView.setText(Integer.toString(current.getCost()));
+            Log.e("ERROR: ", "onBindViewHolder: current.getName()" + current.getName());
         } else {
             // Otherwise initialize data
             holder.nameView.setText("Nothing here yet");

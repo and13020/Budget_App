@@ -37,7 +37,7 @@ public class BudgetFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         // Set in onViewCreated, otherwise getView does not work
-        mTitleEditView = Objects.requireNonNull(getView()).findViewById(R.id.titleEditView);
+        mTitleEditView = Objects.requireNonNull(getView()).findViewById(( R.id.titleEditView));
         mCostEditView = Objects.requireNonNull(getView()).findViewById(R.id.costEditView);
         final Button sButton = getView().findViewById(R.id.button_save);
 
@@ -53,7 +53,7 @@ public class BudgetFragment extends Fragment {
         // Listener to save button
         sButton.setOnClickListener(v -> {
             DatabaseC dbOnClick = new DatabaseC(
-                    mTitleEditView.toString(),
+                    mTitleEditView.getText().toString(),
                     Integer.parseInt(mCostEditView.getText().toString()));
 
             mDatabaseViewModel.insert(dbOnClick);

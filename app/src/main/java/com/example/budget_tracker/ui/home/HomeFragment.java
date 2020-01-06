@@ -29,7 +29,9 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mDatabaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel.class);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        //return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
     @Override
@@ -43,6 +45,7 @@ public class HomeFragment extends Fragment {
 
 
         mDatabaseViewModel.getAllData().observe(this, adapter::setData);
+                //adapter::setData);
 
     }
 }

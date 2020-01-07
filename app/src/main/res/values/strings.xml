@@ -19,4 +19,5 @@
 
     <!-- Fragment Home -->
     <string name="empty">No content.</string>
+    <string name="remove">Remove</string>
 </resources>

@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-        <!-- TODO: make sure view text is appropriate form -->
         <TextView
             android:id="@+id/listItemTitle"
             android:layout_width="wrap_content"
@@ -24,6 +23,8 @@
             android:id="@+id/listItemCost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/small_padding"
+            android:paddingEnd="@dimen/small_padding"
             android:text="@{Integer.toString(item.cost)}"
             android:textSize="20sp"/>
 
@@ -38,9 +39,9 @@
                 android:id="@+id/removeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Remove"
+                android:text="@string/remove"
                 android:padding="10dp"
-                android:textSize="10sp"/>
+                android:textSize="12sp"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

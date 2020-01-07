@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +39,16 @@ public class HomeFragment extends Fragment {
         // Set in onViewCreated, otherwise getView does not work
         RecyclerView recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recyclerView);
         final DatabaseListAdapter adapter = new DatabaseListAdapter(getActivity());
+
+        // Add divider among list items
+        DividerItemDecoration itemDecoration = new DividerItemDecoration(
+                recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL);
+        itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(
+                Objects.requireNonNull(getContext()),
+                R.drawable.list_item_divider)));
+        recyclerView.addItemDecoration(itemDecoration);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

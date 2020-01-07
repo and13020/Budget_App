@@ -22,16 +22,13 @@ public class HomeFragment extends Fragment {
 
     private DatabaseViewModel mDatabaseViewModel;
 
-    public HomeFragment() {
-    }
+    public HomeFragment() {}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mDatabaseViewModel = ViewModelProviders.of(this).get(DatabaseViewModel.class);
-        //return super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.fragment_home, container, false);
-
     }
 
     @Override
@@ -43,9 +40,6 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         mDatabaseViewModel.getAllData().observe(this, adapter::setData);
-                //adapter::setData);
-
     }
 }

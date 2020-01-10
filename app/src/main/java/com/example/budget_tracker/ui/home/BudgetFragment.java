@@ -56,7 +56,7 @@ public class BudgetFragment extends Fragment {
                     mTitleEditView.getText().toString(),
                     Integer.parseInt(mCostEditView.getText().toString()));
 
-            mDatabaseViewModel.insert(dbOnClick);
+            mDatabaseViewModel.insertItem(dbOnClick);
         });
     }
 }

@@ -22,14 +22,24 @@ class DatabaseRepository {
         return mAllData;
     }
 
-    void insert(DatabaseC databaseC) {
-        //DatabaseRoom.databaseWriteExecutor.execute(() -> databaseDao.insertItem(databaseC));
-        new insertAsyncTask(databaseDao).execute(databaseC);
-    }
-
+    void insertItem(DatabaseC databaseC) { new insertAsyncTask(databaseDao).execute(databaseC); }
     private static class insertAsyncTask extends AsyncTask<DatabaseC, Void, Void> {
         private DatabaseDao mAsyncTaskDao;
         insertAsyncTask(DatabaseDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final DatabaseC... params) {
+            mAsyncTaskDao.insertItem(params[0]);
+            return null;
+        }
+    }
+
+    void deleteItem(DatabaseC databaseC) { new deleteItemAsyncTask(databaseDao).execute(databaseC); }
+    private static class deleteItemAsyncTask extends AsyncTask<DatabaseC, Void, Void> {
+        private DatabaseDao mAsyncTaskDao;
+        deleteItemAsyncTask(DatabaseDao dao) {
             mAsyncTaskDao = dao;
         }
 

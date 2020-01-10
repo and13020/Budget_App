@@ -33,13 +33,11 @@ public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapte
             costView = itemView.findViewById(R.id.listItemCost);
         }
     }
-    // new
+
     @Override
     public int getItemViewType(int position) {
         return position;
     }
-
-
 
     @NonNull
     @Override
@@ -55,7 +53,7 @@ public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapte
             DatabaseC current = databaseC.get(getItemViewType(position));
             holder.nameView.setText(current.getName());
             holder.costView.setText(Integer.toString(current.getCost()));
-            Log.e("ERROR: ", "onBindViewHolder: current.getName()" + current.getName());
+            //Log.e("ERROR: ", "onBindViewHolder: current.getName()" + current.getName());
         } else {
             // Otherwise initialize data
             holder.nameView.setText("Nothing here yet");

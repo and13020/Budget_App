@@ -28,8 +28,13 @@ public class DatabaseViewModel extends AndroidViewModel {
         return mAllData;
     }
 
-    public void insert(DatabaseC databaseC) {
-        mRepository.insert(databaseC);
-        Toast.makeText(getApplication(),"Successfully added", Toast.LENGTH_LONG).show();
+    public void insertItem(DatabaseC databaseC) {
+        mRepository.insertItem(databaseC);
+        Toast.makeText(getApplication(),"Successfully added", Toast.LENGTH_SHORT).show();
+    }
+
+    public void deleteItem(DatabaseC databaseC) {
+        mRepository.deleteItem(databaseC);
+        Toast.makeText(getApplication(), "Deleted", Toast.LENGTH_SHORT).show();
     }
 }

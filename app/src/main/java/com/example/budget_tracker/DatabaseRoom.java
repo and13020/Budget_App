@@ -23,7 +23,7 @@ public abstract class DatabaseRoom extends RoomDatabase {
     public abstract DatabaseDao databaseDao();
     private  static volatile DatabaseRoom INSTANCE;
     private  static final int NUMBER_OF_THREADS = 4;
-    static final ExecutorService databaseWriteExecutor =
+    private static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
     static DatabaseRoom getInstance(final Context context) {
@@ -50,12 +50,6 @@ public abstract class DatabaseRoom extends RoomDatabase {
             databaseWriteExecutor.execute(()-> {
                 DatabaseDao dao = INSTANCE.databaseDao();
                 dao.deleteAll();
-
-
-                /*DatabaseC databaseC = new DatabaseC("Apartment", 1250);
-                dao.insertItem(databaseC);
-                databaseC = new DatabaseC("Gas Monies", 30);
-                dao.insertItem(databaseC);*/
             });
         }
     };

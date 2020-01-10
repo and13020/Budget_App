@@ -24,6 +24,9 @@ public interface DatabaseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertItem(DatabaseC databaseC);
 
+    @Delete
+    void deleteItem(DatabaseC databaseC);
+
     @Query("DELETE FROM budget_table")
     void deleteAll();
 

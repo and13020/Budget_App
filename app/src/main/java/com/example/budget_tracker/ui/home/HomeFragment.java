@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.budget_tracker.DatabaseC;
 import com.example.budget_tracker.DatabaseListAdapter;
 import com.example.budget_tracker.DatabaseViewModel;
 import com.example.budget_tracker.R;
@@ -59,8 +60,12 @@ public class HomeFragment extends Fragment {
     }
     private void setAdapter() {
         mAdapter = new DatabaseListAdapter(getActivity());
-        mAdapter.setOnClickListener(position -> mDatabaseViewModel.deleteItem(position));
+        mAdapter.setOnClickListener(dbOnClick -> {
+            mDatabaseViewModel.deleteItem(dbOnClick);
+            mAdapter.notifyDataSetChanged();
+        });
     }
+
     private void setRecyclerView() {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

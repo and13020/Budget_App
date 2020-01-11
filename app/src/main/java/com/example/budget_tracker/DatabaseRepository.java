@@ -45,7 +45,7 @@ class DatabaseRepository {
 
         @Override
         protected Void doInBackground(final DatabaseC... params) {
-            mAsyncTaskDao.insertItem(params[0]);
+            mAsyncTaskDao.deleteItem(params[0]);
             return null;
         }
     }

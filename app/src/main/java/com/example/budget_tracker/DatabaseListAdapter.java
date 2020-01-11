@@ -2,6 +2,7 @@ package com.example.budget_tracker;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapte
                     if (position != RecyclerView.NO_POSITION) {
                         DatabaseC dbOnClick = databaseC.get(position);
                         listener.onDeleteClick(dbOnClick);
+                        Log.e("Error", "DatabaseViewHolder: end of setClickListener");
                     }
                 }
             });
@@ -96,5 +98,4 @@ public class DatabaseListAdapter extends RecyclerView.Adapter<DatabaseListAdapte
             return 0;
         }
     }
-
 }

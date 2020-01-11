@@ -23,6 +23,9 @@ import java.util.Objects;
 public class HomeFragment extends Fragment {
 
     private DatabaseViewModel mDatabaseViewModel;
+    private DividerItemDecoration mItemDecoration;
+    private RecyclerView mRecyclerView;
+    private DatabaseListAdapter mAdapter;
 
     public HomeFragment() {}
 
@@ -37,21 +40,30 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         // Set in onViewCreated, otherwise getView does not work
-        RecyclerView recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recyclerView);
-        final DatabaseListAdapter adapter = new DatabaseListAdapter(getActivity());
+        mRecyclerView = Objects.requireNonNull(getView()).findViewById(R.id.recyclerView);
 
-        // Add divider among list items
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(
-                recyclerView.getContext(),
+        createDivider();
+        setAdapter();
+        setRecyclerView();
+
+        mDatabaseViewModel.getAllData().observe(this, mAdapter::setData);
+    }
+
+    private void createDivider(){
+        mItemDecoration = new DividerItemDecoration(
+                mRecyclerView.getContext(),
                 DividerItemDecoration.VERTICAL);
-        itemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(
+        mItemDecoration.setDrawable(Objects.requireNonNull(ContextCompat.getDrawable(
                 Objects.requireNonNull(getContext()),
                 R.drawable.list_item_divider)));
-        recyclerView.addItemDecoration(itemDecoration);
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        mDatabaseViewModel.getAllData().observe(this, adapter::setData);
+    }
+    private void setAdapter() {
+        mAdapter = new DatabaseListAdapter(getActivity());
+        mAdapter.setOnClickListener(position -> mDatabaseViewModel.deleteItem(position));
+    }
+    private void setRecyclerView() {
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addItemDecoration(mItemDecoration);
     }
 }
